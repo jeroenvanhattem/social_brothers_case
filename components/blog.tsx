@@ -11,6 +11,7 @@ import {
   Button
 } from "@chakra-ui/react"
 import { useEffect, useRef, useState } from "react"
+import Header from './header'
 import { uploadPost, useGetCategories, useGetPosts } from "../hooks/postsHooks"
 import { NewPost, Post, PostDataType } from "../types/types"
 
@@ -50,32 +51,7 @@ const Blogs = () => {
         justify='flex-start'
         bgColor='#F4F4F4'
       >
-        <Flex
-          minH='500px'
-          w='100%'
-          bgColor='black'
-          bg="linear-gradient(rgba(0, 0, 0, 0.4 ), rgba(0, 0, 0, 0.4)), url('/static/images/background.png')"
-          bgSize='cover'
-          bgPosition='center'
-          bgRepeat='no-repeat'
-          justify='center'
-          align='center'
-          pos='relative'
-        >
-          <Flex
-            pos='absolute'
-            top={16}
-            left={16}
-          >
-            <Image src='/static/images/logo.svg' width={96} alt='Social Brother logo' />
-          </Flex>
-          <Heading
-            color='white'
-            fontSize={64}
-          >
-            Blog
-          </Heading>
-        </Flex>
+        <Header title='Blog' />
 
         <Flex
           flex='1'
@@ -118,12 +94,47 @@ const Blogs = () => {
             })}
           </Wrap>
           <Flex
-
+            align='center'
+            flexDir='row'
           >
+            {postData && postData.current_page > 1 &&
+              <Text
+                color='orange.400'
+                mx={2}
+                cursor='pointer'
+                onClick={() => changePage(postData.current_page - 1)}
+              >
+                Vorige pagina
+              </Text>
+            }
             {
-              [...Array(postData?.last_page && postData?.last_page - 1)].map((e, i) =>
-                <Text cursor='pointer' onClick={() => changePage(i + 1)} key={i}>{i + 1}</Text>
+              [...Array(postData && postData.last_page && postData.last_page - 1)].map((e, i) =>
+                <Text
+                  lineHeight='2em'
+                  align='center'
+                  mx={1}
+                  cursor='pointer'
+                  borderRadius={postData?.current_page === i + 1 ? '100%' : 'unset'}
+                  bgColor={postData?.current_page === i + 1 ? 'gray.200' : 'unset'}
+                  h={postData?.current_page === i + 1 ? '2em' : 'unset'}
+                  w={postData?.current_page === i + 1 ? '2em' : 'unset'}
+                  fontWeight={postData?.current_page === i + 1 ? '800' : 'unset'}
+                  onClick={() => changePage(i + 1)}
+                  key={i}
+                >
+                  {i + 1}
+                </Text>
               )
+            }
+            {postData && postData.current_page < postData.last_page &&
+              <Text
+                color='orange.400'
+                mx={2}
+                cursor='pointer'
+                onClick={() => changePage(postData.current_page + 1)}
+              >
+                Volgende pagina
+              </Text>
             }
           </Flex>
         </Flex>

@@ -13,6 +13,7 @@ import {
 import { useEffect, useRef, useState } from "react"
 import { uploadPost, useGetCategories, useGetPosts } from "../hooks/postsHooks"
 import { NewPost, Post, PostDataType } from "../types/types"
+import Header from "./header"
 
 const Index = () => {
   const [postData, setPostData] = useState<PostDataType | null>(null)
@@ -69,7 +70,7 @@ const Index = () => {
     const category = chosenCategory
     const imageFile = imageInputRef?.current?.files
     const content = contentInputRef?.current?.value
-    let image : File
+    let image: File
 
     if (imageFile) {
       image = imageFile[0]
@@ -79,7 +80,7 @@ const Index = () => {
     console.log(category)
     console.log(content)
     console.log(imageFile)
-    
+
     if (title && category && imageFile && content) {
       console.log(title)
       console.log(category)
@@ -95,7 +96,7 @@ const Index = () => {
 
       console.log(newPost)
       // setNewPost(newPost)
-      uploadPost({post: newPost})
+      uploadPost({ post: newPost })
       doneCreating()
     }
   }
@@ -118,32 +119,7 @@ const Index = () => {
         justify='flex-start'
         bgColor='#F4F4F4'
       >
-        <Flex
-          minH='500px'
-          w='100%'
-          bgColor='black'
-          bg="linear-gradient(rgba(0, 0, 0, 0.4 ), rgba(0, 0, 0, 0.4)), url('/static/images/background.png')"
-          bgSize='cover'
-          bgPosition='center'
-          bgRepeat='no-repeat'
-          justify='center'
-          align='center'
-          pos='relative'
-        >
-          <Flex
-            pos='absolute'
-            top={16}
-            left={16}
-          >
-            <Image src='/static/images/logo.svg' width={96} alt='Social Brother logo' />
-          </Flex>
-          <Heading
-            color='white'
-            fontSize={64}
-          >
-            Blog
-          </Heading>
-        </Flex>
+        <Header />
 
         <Flex
           flexDir='row'
