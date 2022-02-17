@@ -5,6 +5,7 @@ import {
   Text
 } from "@chakra-ui/react"
 import { useRouter } from "next/router"
+import { relative } from "path"
 import { useEffect, useState } from "react"
 
 const Header = (props: any) => {
@@ -31,9 +32,10 @@ const Header = (props: any) => {
       justify='center'
       align='center'
       pos='relative'
+      flexDir='column'
     >
       <Flex
-        pos='absolute'
+        pos={{base: 'unset', lg: 'absolute'}}
         top={6}
         left={32}
         w='300px'
@@ -51,7 +53,7 @@ const Header = (props: any) => {
         </Heading>
       }
       <Flex
-        pos='absolute'
+        pos={{base: 'unset', lg: 'absolute'}}
         top={6}
         right={32}
         h='70px'
@@ -59,7 +61,8 @@ const Header = (props: any) => {
         fontSize={18}
         color='brand.white'
       >
-        <Text
+        <Heading
+          fontSize={18}
           cursor='pointer'
           onClick={() => router.push('/')}
           textDecoration={currentPath === '' ? 'underline' : 'unset'}
@@ -68,8 +71,9 @@ const Header = (props: any) => {
           textUnderlineOffset='8px'
         >
           Home
-        </Text>
-        <Text
+        </Heading>
+        <Heading
+          fontSize={18}
           cursor='pointer'
           onClick={() => router.push('/blog')}
           textDecoration={currentPath === 'blog' ? 'underline' : 'unset'}
@@ -79,7 +83,7 @@ const Header = (props: any) => {
           ml={8}
         >
           Blog
-        </Text>
+        </Heading>
       </Flex>
 
     </Flex>

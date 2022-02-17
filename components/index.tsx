@@ -142,7 +142,6 @@ const Index = () => {
             flexDir={{ base: 'column', lg: 'row' }}
             w={{ base: '100%', lg: '90%' }}
             minH='1050px'
-            maxH='1050px'
             mx='auto'
             mt={16}
           >
@@ -172,18 +171,18 @@ const Index = () => {
                     <Text>Berichtnaam</Text>
                     <Text ml={4} color='red' display={titleError !== '' ? 'unset' : 'none'}>{titleError}</Text>
                   </Flex>
-                  <Input ref={titleInputRef} bgColor='brand.inputBackground' placeholder='Geen titel' fontStyle='italic' />
+                  <Input border='none' ref={titleInputRef} bgColor='brand.inputBackground' placeholder='Geen titel' fontStyle='italic' />
                 </Flex>
 
                 <Flex
                   flexDir='column'
                   my={4}
                 >
-                <Flex >
-                  <Text>Categorie</Text>
-                  <Text ml={4} color='red' display={categoryError !== '' ? 'unset' : 'none'}>{categoryError}</Text>
-                </Flex>
-                  <Select ref={categoryInputRef} bgColor='brand.inputBackground' onChange={updateSelectedCategory} placeholder='Geen categorie' fontStyle='italic' >
+                  <Flex >
+                    <Text>Categorie</Text>
+                    <Text ml={4} color='red' display={categoryError !== '' ? 'unset' : 'none'}>{categoryError}</Text>
+                  </Flex>
+                  <Select border='none' ref={categoryInputRef} bgColor='brand.inputBackground' onChange={updateSelectedCategory} placeholder='Geen categorie' fontStyle='italic' >
                     {categories && categories.map((category: any) => {
                       return <option value={category.id} style={{ fontFamily: 'Proxima Nova Rg' }} key={category.id}>{category.name}</option>
                     })}
@@ -194,13 +193,16 @@ const Index = () => {
                   flexDir='column'
                   my={4}
                 >
-                <Flex >
-                  <Text>Header afbeelding</Text>
-                  <Text ml={4} color='red' display={imageError !== '' ? 'unset' : 'none'}>{imageError}</Text>
-                </Flex>
+                  <Flex >
+                    <Text>Header afbeelding</Text>
+                    <Text ml={4} color='red' display={imageError !== '' ? 'unset' : 'none'}>{imageError}</Text>
+                  </Flex>
                   <Flex
                     align='center'
                     p={2}
+                    bgColor='brand.inputBackground'
+                    borderRadius={5}
+                    border='none'
                   >
                     <Camera color='#868686' size={18} />
                     <Button w={20} h={6} borderRadius={96} ml={4} px={12} fontSize={12} fontWeight={300} color='brand.white' bgColor='brand.buttonDark' onClick={() => imageInputRef?.current?.click()}>Kies bestand</Button>
@@ -214,11 +216,11 @@ const Index = () => {
                   flexDir='column'
                   my={4}
                 >
-                <Flex >
-                  <Text>Bericht</Text>
-                  <Text ml={4} color='red' display={contentError !== '' ? 'unset' : 'none'}>{contentError}</Text>
-                </Flex>
-                  <Textarea ref={contentInputRef} bgColor='brand.inputBackground' minH='470px' />
+                  <Flex >
+                    <Text>Bericht</Text>
+                    <Text ml={4} color='red' display={contentError !== '' ? 'unset' : 'none'}>{contentError}</Text>
+                  </Flex>
+                  <Textarea border='none' ref={contentInputRef} bgColor='brand.inputBackground' minH='470px' />
                 </Flex>
               </Flex>
 
@@ -244,6 +246,7 @@ const Index = () => {
               flexDir='column'
               bgColor="white"
               p={8}
+              maxH='1050px'
               m={8}
               color='brand.text'
             >

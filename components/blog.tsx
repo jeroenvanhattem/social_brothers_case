@@ -72,18 +72,18 @@ const Blogs = () => {
             spacing={8}
           >
             {postData && postData.data && postData.data.map((post: PostType) => {
-                  return <Post post={post} key={post.id} type='blog' />
+              return <Post post={post} key={post.id} type='blog' />
             })}
           </Wrap>
           <Flex
             align='center'
-            flexDir='row'
+            flexDir={{ base: 'column', lg: 'row' }}
           >
             {postData && postData.current_page > 1 &&
               <Flex
 
               >
-                <ArrowLeft color='#F27623'/>
+                <ArrowLeft color='#F27623' />
                 <Text
                   color='brand.navigation.orange'
                   mx={2}
@@ -94,26 +94,28 @@ const Blogs = () => {
                 </Text>
               </Flex>
             }
-            {
-              [...Array(postData && postData.last_page && postData.last_page - 1)].map((e, i) =>
-                <Text
-                  lineHeight='2em'
-                  color='brand.navigation.text'
-                  align='center'
-                  mx={1}
-                  cursor='pointer'
-                  borderRadius={postData?.current_page === i + 1 ? '100%' : 'unset'}
-                  bgColor={postData?.current_page === i + 1 ? 'brand.navigation.background' : 'unset'}
-                  h={postData?.current_page === i + 1 ? '2em' : 'unset'}
-                  w={postData?.current_page === i + 1 ? '2em' : 'unset'}
-                  fontWeight={postData?.current_page === i + 1 ? '800' : 'unset'}
-                  onClick={() => changePage(i + 1)}
-                  key={i}
-                >
-                  {i + 1}
-                </Text>
-              )
-            }
+            <Flex flexDir='row'>
+              {
+                [...Array(postData && postData.last_page && postData.last_page - 1)].map((e, i) =>
+                  <Text
+                    lineHeight='2em'
+                    color='brand.navigation.text'
+                    align='center'
+                    mx={1}
+                    cursor='pointer'
+                    borderRadius={postData?.current_page === i + 1 ? '100%' : 'unset'}
+                    bgColor={postData?.current_page === i + 1 ? 'brand.navigation.background' : 'unset'}
+                    h={postData?.current_page === i + 1 ? '2em' : 'unset'}
+                    w={postData?.current_page === i + 1 ? '2em' : 'unset'}
+                    fontWeight={postData?.current_page === i + 1 ? '800' : 'unset'}
+                    onClick={() => changePage(i + 1)}
+                    key={i}
+                  >
+                    {i + 1}
+                  </Text>
+                )
+              }
+            </Flex>
             {postData && postData.current_page < postData.last_page &&
               <Flex
 

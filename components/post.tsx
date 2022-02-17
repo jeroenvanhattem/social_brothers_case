@@ -1,8 +1,10 @@
 import { Flex, Heading, Text } from "@chakra-ui/react"
+import { useEffect } from "react"
 import { PostType } from "../types/types"
 
-const PostType = (props: any) => {
-  const { post, type } = props
+const PostType = ({ post, type }: { post: PostType, type: string }) => {
+  const date = new Date(post.created_at).toLocaleDateString().replaceAll('/', '-')
+
   return (
     <Flex
       w={{ base: '100%', lg: type === 'blog' ? 256 : '40%' }}
@@ -14,13 +16,16 @@ const PostType = (props: any) => {
       <Flex
         h='96px'
         w='100%'
+        pos='relative'
         bg={`linear-gradient(rgba(0, 0, 0, 0.4 ), rgba(0, 0, 0, 0.4)), url(${post.img_url})`}
       >
-
+        <Text color='brand.white' pos='absolute' fontStyle='italic' fontSize={12} left={4} bottom={2} >{date}</Text>
+        <Text color='brand.white' pos='absolute' fontStyle='italic' fontSize={12} right={4} bottom={2} >{post.category.name}</Text>
       </Flex>
       <Flex
         flexDir='column'
         p={4}
+        overflowY='hidden'
       >
         <Heading color='brand.header' my={2} fontSize={28}>{post.title}</Heading>
         <Text color='brand.postText'>{post.content}</Text>
