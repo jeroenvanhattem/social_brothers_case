@@ -18,6 +18,9 @@ const PostType = ({ post, type }: { post: PostType, type: string }) => {
         w='100%'
         pos='relative'
         bg={`linear-gradient(rgba(0, 0, 0, 0.4 ), rgba(0, 0, 0, 0.4)), url(${post.img_url})`}
+        bgSize='cover'
+        bgPosition='center'
+        bgRepeat='no-repeat'
       >
         <Text color='brand.white' pos='absolute' fontStyle='italic' fontSize={12} left={4} bottom={2} >{date}</Text>
         <Text color='brand.white' pos='absolute' fontStyle='italic' fontSize={12} right={4} bottom={2} >{post.category.name}</Text>
