@@ -12,8 +12,8 @@ import {
 } from "@chakra-ui/react"
 import { useEffect, useRef, useState } from "react"
 import Header from './header'
-import { uploadPost, useGetCategories, useGetPosts } from "../hooks/postsHooks"
-import { NewPost, PostType, PostDataType } from "../types/types"
+import { useGetPosts } from "../hooks/postsHooks"
+import { PostType, PostDataType } from "../types/types"
 import { ArrowLeft, ArrowRight } from "react-feather"
 import Post from './post'
 import Footer from "./footer"
@@ -34,12 +34,9 @@ const Blogs = () => {
 
   useEffect(() => {
     setReadyToGetPosts(true)
-    console.log('Get posts')
-    console.log(postPage)
   }, [postPage, setReadyToGetPosts])
 
   const changePage = (page: any) => {
-    console.log(page)
     setPostPage(page)
     setReadyToGetPosts(true)
   }

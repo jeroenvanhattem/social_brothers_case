@@ -25,7 +25,7 @@ export type PostType = {
   category: Category
 }
 
-export type NewPost = {
+export type NewPostType = {
   title: string
   content: string
   category_id: number

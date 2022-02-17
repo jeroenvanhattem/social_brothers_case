@@ -17,7 +17,7 @@ export const useGetPosts = async (props: any) => {
 }
 
 export const useGetCategories = async (props: any) => {
-  const { readyToGet,callback } = props
+  const { readyToGet, callback } = props
 
   if (readyToGet) {
     const rawResponse = await fetch(`https://frontend-case-api.sbdev.nl/api/categories`, {
@@ -33,6 +33,36 @@ export const useGetCategories = async (props: any) => {
     callback(response)
   }
 }
+
+// export const useCreatePost = async (props: any) => {
+//   const { readyToGo, post, callback, handled } = props
+
+//   setTimeout(()=> {}, 200)
+//   if (readyToGo) {
+//     console.log('Ready for take off')
+//     if (post) {
+//       callback()
+//       console.log('Posting')
+//       var formdata = new FormData();
+//       formdata.append("title", post.title);
+//       formdata.append("content", post.content);
+//       formdata.append("category_id", post.category_id);
+//       formdata.append("image", post.image, post.image_name);
+
+//       const rawResponse = await fetch(`https://frontend-case-api.sbdev.nl/api/posts`, {
+//         method: 'POST',
+//         headers: {
+//           'token': process.env.TOKEN || ''
+//         },
+//         body: formdata
+//       })
+
+//       const response = await rawResponse.json()
+//       console.log(response)
+//       callback(response)
+//     }
+//   }
+// }
 
 export const uploadPost = async (props: any) => {
   const { readyToGo, post, callback } = props

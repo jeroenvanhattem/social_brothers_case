@@ -8,6 +8,8 @@ const Footer = () => {
       bgColor='brand.footer'
       justify='center'
       align='center'
+      bottom={0}
+      mt='auto'
     >
       <Text fontSize={12} lineHeight='15px' color='brand.white'>&copy; Copyright Social Brothers - 2020</Text>
     </Flex>

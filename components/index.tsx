@@ -14,7 +14,7 @@ import {
 import { useEffect, useRef, useState } from "react"
 import { Camera } from "react-feather"
 import { uploadPost, useGetCategories, useGetPosts } from "../hooks/postsHooks"
-import { NewPost, PostType, PostDataType } from "../types/types"
+import { NewPostType, PostType, PostDataType } from "../types/types"
 import Post from './post'
 import Header from "./header"
 import Footer from "./footer"
@@ -24,10 +24,7 @@ const Index = () => {
   const [categories, setCategories] = useState<any>(null)
   const [readyToGetPosts, setReadyToGetPosts] = useState(true)
   const [readyToGetCategories, setReadyToGetCategories] = useState(true)
-  const [readyToCreate, setReadyToCreate] = useState(true)
   const [amountOfPosts, setAmountOfPosts] = useState(4)
-  const [postPage, setPostPage] = useState(1)
-  // const [newPost, setNewPost] = useState<NewPost | null>(null)
   const [imageExample, setImageExample] = useState<any>(null)
   const titleInputRef = useRef<HTMLInputElement>(null)
   const [chosenCategory, setChosenCategory] = useState('')
@@ -39,14 +36,8 @@ const Index = () => {
   const [imageError, setImageError] = useState('')
   const [contentError, setContentError] = useState('')
 
-  const doneCreating = () => {
-    setReadyToCreate(false)
-    setReadyToGetPosts(true)
-  }
-
-  useGetPosts({ readyToGet: readyToGetPosts, amount: amountOfPosts, pages: postPage, callback: setPostData })
+  useGetPosts({ readyToGet: readyToGetPosts, amount: amountOfPosts, page: 1, callback: setPostData })
   useGetCategories({ readyToGet: readyToGetCategories, callback: setCategories })
-  // useCreatePost({ readyToCreate, post: newPost, callback: doneCreating })
 
   useEffect(() => {
     if (postData) {
@@ -66,9 +57,7 @@ const Index = () => {
   }
 
   const updateSelectedCategory = (event: any) => {
-    console.log('Changed category')
     if (event && event.target && event.target.value) {
-      console.log(event?.target?.value)
       setChosenCategory(event?.target?.value)
     }
   }
@@ -84,21 +73,12 @@ const Index = () => {
       image = imageFile[0]
     }
 
-    console.log(title)
-    console.log(category)
-    console.log(content)
-    console.log(imageFile)
-
     title === '' ? setTitleError('Naam is verplicht') : setTitleError('')
     category === '' ? setCategoryError('Categorie is verplicht') : setCategoryError('')
     !image ? setImageError('Een afbeelding is verplicht') : setImageError('')
     content === '' ? setContentError('Bericht is verplicht') : setContentError('')
 
     if (title && category && image && content) {
-      console.log(title)
-      console.log(category)
-      console.log(content)
-
       const newPost = {
         title,
         category_id: parseInt(category),
@@ -107,10 +87,8 @@ const Index = () => {
         image_name: image.name
       }
 
-      console.log(newPost)
-      // setNewPost(newPost)
       uploadPost({ post: newPost })
-      doneCreating()
+      setReadyToGetPosts(true)
     }
   }
 
@@ -119,7 +97,6 @@ const Index = () => {
     if (imageFile) {
       setImageExample(URL.createObjectURL(imageFile[0]))
     }
-
   }
 
   return (

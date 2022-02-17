@@ -16,7 +16,6 @@ const Header = (props: any) => {
   useEffect(() => {
     if (router) {
       setCurrentPath(router.pathname.split('/')[1])
-      console.log(router.pathname.split('/')[1])
     }
   }, [router])
 
