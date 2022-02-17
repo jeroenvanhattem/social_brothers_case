@@ -65,9 +65,9 @@ const Index = () => {
     setReadyToGetPosts(true)
   }
 
-  const updateSelectedCategory = (event: Event) => {
+  const updateSelectedCategory = (event: any) => {
     console.log('Changed category')
-    if (event) {
+    if (event && event.target && event.target.value) {
       console.log(event?.target?.value)
       setChosenCategory(event?.target?.value)
     }
@@ -78,7 +78,7 @@ const Index = () => {
     const category = chosenCategory
     const imageFile = imageInputRef?.current?.files
     const content = contentInputRef?.current?.value
-    let image: File = null
+    let image: File | null = null
 
     if (imageFile) {
       image = imageFile[0]
@@ -129,7 +129,6 @@ const Index = () => {
         w="100vw"
         maxW='100vw'
         flexDir='column'
-        justify='flex-start'
         bgColor='brand.background'
         overflowX='hidden'
       >
@@ -137,13 +136,13 @@ const Index = () => {
 
         <Flex
           flexDir='column'
+          mt={8}
         >
           <Flex
             flexDir={{ base: 'column', lg: 'row' }}
             w={{ base: '100%', lg: '90%' }}
             minH='1050px'
             mx='auto'
-            mt={16}
           >
             <Flex
               flex='1'

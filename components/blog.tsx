@@ -16,6 +16,7 @@ import { uploadPost, useGetCategories, useGetPosts } from "../hooks/postsHooks"
 import { NewPost, PostType, PostDataType } from "../types/types"
 import { ArrowLeft, ArrowRight } from "react-feather"
 import Post from './post'
+import Footer from "./footer"
 
 const Blogs = () => {
   const [postData, setPostData] = useState<PostDataType | null>(null)
@@ -50,90 +51,94 @@ const Blogs = () => {
         w="100vw"
         maxW='100vw'
         flexDir='column'
-        justify='center'
         bgColor='brand.background'
         overflowX='hidden'
       >
         <Header title='Blog' />
 
         <Flex
-          flex='1'
           flexDir='column'
-          bgColor="white"
-          p={8}
-          my={8}
-          mx='auto'
-          align='center'
-          w='90%'
+          mt={8}
         >
-          <Wrap
-            m={8}
-            w='100%'
-            spacing={8}
-          >
-            {postData && postData.data && postData.data.map((post: PostType) => {
-              return <Post post={post} key={post.id} type='blog' />
-            })}
-          </Wrap>
           <Flex
+            flex='1'
+            flexDir='column'
+            bgColor="white"
+            p={8}
+            my={8}
+            mx='auto'
             align='center'
-            flexDir={{ base: 'column', lg: 'row' }}
+            w='90%'
           >
-            {postData && postData.current_page > 1 &&
-              <Flex
+            <Wrap
+              m={8}
+              w='100%'
+              spacing={8}
+            >
+              {postData && postData.data && postData.data.map((post: PostType) => {
+                return <Post post={post} key={post.id} type='blog' />
+              })}
+            </Wrap>
+            <Flex
+              align='center'
+              flexDir={{ base: 'column', lg: 'row' }}
+            >
+              {postData && postData.current_page > 1 &&
+                <Flex
 
-              >
-                <ArrowLeft color='#F27623' />
-                <Text
-                  color='brand.navigation.orange'
-                  mx={2}
-                  cursor='pointer'
-                  onClick={() => changePage(postData.current_page - 1)}
                 >
-                  Vorige pagina
-                </Text>
-              </Flex>
-            }
-            <Flex flexDir='row'>
-              {
-                [...Array(postData && postData.last_page && postData.last_page - 1)].map((e, i) =>
+                  <ArrowLeft color='#F27623' />
                   <Text
-                    lineHeight='2em'
-                    color='brand.navigation.text'
-                    align='center'
-                    mx={1}
+                    color='brand.navigation.orange'
+                    mx={2}
                     cursor='pointer'
-                    borderRadius={postData?.current_page === i + 1 ? '100%' : 'unset'}
-                    bgColor={postData?.current_page === i + 1 ? 'brand.navigation.background' : 'unset'}
-                    h={postData?.current_page === i + 1 ? '2em' : 'unset'}
-                    w={postData?.current_page === i + 1 ? '2em' : 'unset'}
-                    fontWeight={postData?.current_page === i + 1 ? '800' : 'unset'}
-                    onClick={() => changePage(i + 1)}
-                    key={i}
+                    onClick={() => changePage(postData.current_page - 1)}
                   >
-                    {i + 1}
+                    Vorige pagina
                   </Text>
-                )
+                </Flex>
+              }
+              <Flex flexDir='row'>
+                {
+                  [...Array(postData && postData.last_page && postData.last_page - 1)].map((e, i) =>
+                    <Text
+                      lineHeight='2em'
+                      color='brand.navigation.text'
+                      align='center'
+                      mx={1}
+                      cursor='pointer'
+                      borderRadius={postData?.current_page === i + 1 ? '100%' : 'unset'}
+                      bgColor={postData?.current_page === i + 1 ? 'brand.navigation.background' : 'unset'}
+                      h={postData?.current_page === i + 1 ? '2em' : 'unset'}
+                      w={postData?.current_page === i + 1 ? '2em' : 'unset'}
+                      fontWeight={postData?.current_page === i + 1 ? '800' : 'unset'}
+                      onClick={() => changePage(i + 1)}
+                      key={i}
+                    >
+                      {i + 1}
+                    </Text>
+                  )
+                }
+              </Flex>
+              {postData && postData.current_page < postData.last_page &&
+                <Flex
+
+                >
+                  <Text
+                    color='brand.navigation.orange'
+                    mx={2}
+                    cursor='pointer'
+                    onClick={() => changePage(postData.current_page + 1)}
+                  >
+                    Volgende pagina
+                  </Text>
+                  <ArrowRight color='#F27623' />
+                </Flex>
               }
             </Flex>
-            {postData && postData.current_page < postData.last_page &&
-              <Flex
-
-              >
-                <Text
-                  color='brand.navigation.orange'
-                  mx={2}
-                  cursor='pointer'
-                  onClick={() => changePage(postData.current_page + 1)}
-                >
-                  Volgende pagina
-                </Text>
-                <ArrowRight color='#F27623' />
-              </Flex>
-            }
           </Flex>
         </Flex>
-
+        <Footer />
       </Flex>
     </>
   )

@@ -2,7 +2,7 @@ import { Flex, Heading, Text } from "@chakra-ui/react"
 import { useEffect } from "react"
 import { PostType } from "../types/types"
 
-const PostType = ({ post, type }: { post: PostType, type: string }) => {
+  const PostType = ({ post, type = '' }: { post: PostType, type?: string }) => {
   const date = new Date(post.created_at).toLocaleDateString().replaceAll('/', '-')
 
   return (
