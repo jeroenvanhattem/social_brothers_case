@@ -2,8 +2,11 @@ import { Flex, Heading, Text } from "@chakra-ui/react"
 import { useEffect } from "react"
 import { PostType } from "../types/types"
 
-  const PostType = ({ post, type = '' }: { post: PostType, type?: string }) => {
+const PostType = ({ post, type = '' }: { post: PostType, type?: string }) => {
   const date = new Date(post.created_at).toLocaleDateString().replaceAll('/', '-')
+
+  const API_IMAGE_WORKING = false
+  const image = API_IMAGE_WORKING ? post.img_url : 'https://picsum.photos/700/300'
 
   return (
     <Flex
@@ -17,7 +20,7 @@ import { PostType } from "../types/types"
         h='96px'
         w='100%'
         pos='relative'
-        bg={`linear-gradient(rgba(0, 0, 0, 0.4 ), rgba(0, 0, 0, 0.4)), url(${post.img_url})`}
+        bg={`linear-gradient(rgba(0, 0, 0, 0.4 ), rgba(0, 0, 0, 0.4)), url(${image})`}
         bgSize='cover'
         bgPosition='center'
         bgRepeat='no-repeat'
