@@ -21,8 +21,9 @@ const Header = (props: any) => {
 
   return (
     <Flex
-      minH='500px'
+      minH='250px'
       w='100%'
+      bgColor='brand.black'
       bg="linear-gradient(rgba(0, 0, 0, 0.4 ), rgba(0, 0, 0, 0.4)), url('/static/images/background.png')"
       bgSize='cover'
       bgPosition='center'
@@ -33,24 +34,29 @@ const Header = (props: any) => {
     >
       <Flex
         pos='absolute'
-        top={16}
-        left={16}
+        top={6}
+        left={32}
+        w='300px'
+        h='70px'
+        align='center'
       >
-        <Image src='/static/images/logo.svg' width={96} alt='Social Brother logo' />
+        <Image src='/static/images/logo.svg' alt='Social Brother logo' />
       </Flex>
       {title &&
         <Heading
           color='brand.white'
-          fontSize={64}
+          fontSize={48}
         >
           {title}
         </Heading>
       }
       <Flex
         pos='absolute'
-        top={16}
-        right={16}
-        fontSize={24}
+        top={6}
+        right={32}
+        h='70px'
+        align='center'
+        fontSize={18}
         color='brand.white'
       >
         <Text

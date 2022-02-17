@@ -13,8 +13,9 @@ import {
 import { useEffect, useRef, useState } from "react"
 import Header from './header'
 import { uploadPost, useGetCategories, useGetPosts } from "../hooks/postsHooks"
-import { NewPost, Post, PostDataType } from "../types/types"
+import { NewPost, PostType, PostDataType } from "../types/types"
 import { ArrowLeft, ArrowRight } from "react-feather"
+import Post from './post'
 
 const Blogs = () => {
   const [postData, setPostData] = useState<PostDataType | null>(null)
@@ -49,7 +50,7 @@ const Blogs = () => {
         w="100vw"
         maxW='100vw'
         flexDir='column'
-        justify='flex-start'
+        justify='center'
         bgColor='brand.background'
         overflowX='hidden'
       >
@@ -60,39 +61,18 @@ const Blogs = () => {
           flexDir='column'
           bgColor="white"
           p={8}
-          m={8}
-          maxH='1200px'
+          my={8}
+          mx='auto'
           align='center'
-          w='100%'
+          w='90%'
         >
           <Wrap
             m={8}
             w='100%'
-            overflowY='scroll'
-            overflowX='hidden'
-            justify='center'
             spacing={8}
           >
-            {postData && postData.data && postData.data.map((post: Post) => {
-              return (
-                <Flex
-                  w={256}
-                  h={256}
-                  shadow='xl'
-                  key={post.id}
-                  flexDir='column'
-                >
-                  <Flex
-                    h='96px'
-                    w='100%'
-                    bg={`linear-gradient(rgba(0, 0, 0, 0.4 ), rgba(0, 0, 0, 0.4)), url(${post.img_url})`}
-                  >
-
-                  </Flex>
-                  <Heading fontSize={28}>{post.title}</Heading>
-                  <Text>{post.content}</Text>
-                </Flex>
-              )
+            {postData && postData.data && postData.data.map((post: PostType) => {
+                  return <Post post={post} key={post.id} type='blog' />
             })}
           </Wrap>
           <Flex

@@ -2,10 +2,10 @@ import { Flex, Heading, Text } from "@chakra-ui/react"
 import { PostType } from "../types/types"
 
 const PostType = (props: any) => {
-  const { post } = props
+  const { post, type } = props
   return (
     <Flex
-      w='40%'
+      w={{ base: '100%', lg: type === 'blog' ? 256 : '40%' }}
       h={384}
       shadow='lg'
       key={post.id}
