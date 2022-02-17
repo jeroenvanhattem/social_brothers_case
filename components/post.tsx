@@ -6,7 +6,7 @@ const PostType = ({ post, type = '' }: { post: PostType, type?: string }) => {
   const date = new Date(post.created_at).toLocaleDateString().replaceAll('/', '-')
 
   const API_IMAGE_WORKING = false
-  const image = API_IMAGE_WORKING ? post.img_url : 'https://picsum.photos/700/300'
+  const image = API_IMAGE_WORKING ? post.img_url : 'https://picsum.photos/256/96'
 
   return (
     <Flex
