@@ -14,6 +14,7 @@ import { useEffect, useRef, useState } from "react"
 import Header from './header'
 import { uploadPost, useGetCategories, useGetPosts } from "../hooks/postsHooks"
 import { NewPost, Post, PostDataType } from "../types/types"
+import { ArrowLeft, ArrowRight } from "react-feather"
 
 const Blogs = () => {
   const [postData, setPostData] = useState<PostDataType | null>(null)
@@ -49,7 +50,8 @@ const Blogs = () => {
         maxW='100vw'
         flexDir='column'
         justify='flex-start'
-        bgColor='#F4F4F4'
+        bgColor='brand.background'
+        overflowX='hidden'
       >
         <Header title='Blog' />
 
@@ -98,24 +100,30 @@ const Blogs = () => {
             flexDir='row'
           >
             {postData && postData.current_page > 1 &&
-              <Text
-                color='orange.400'
-                mx={2}
-                cursor='pointer'
-                onClick={() => changePage(postData.current_page - 1)}
+              <Flex
+
               >
-                Vorige pagina
-              </Text>
+                <ArrowLeft color='#F27623'/>
+                <Text
+                  color='brand.navigation.orange'
+                  mx={2}
+                  cursor='pointer'
+                  onClick={() => changePage(postData.current_page - 1)}
+                >
+                  Vorige pagina
+                </Text>
+              </Flex>
             }
             {
               [...Array(postData && postData.last_page && postData.last_page - 1)].map((e, i) =>
                 <Text
                   lineHeight='2em'
+                  color='brand.navigation.text'
                   align='center'
                   mx={1}
                   cursor='pointer'
                   borderRadius={postData?.current_page === i + 1 ? '100%' : 'unset'}
-                  bgColor={postData?.current_page === i + 1 ? 'gray.200' : 'unset'}
+                  bgColor={postData?.current_page === i + 1 ? 'brand.navigation.background' : 'unset'}
                   h={postData?.current_page === i + 1 ? '2em' : 'unset'}
                   w={postData?.current_page === i + 1 ? '2em' : 'unset'}
                   fontWeight={postData?.current_page === i + 1 ? '800' : 'unset'}
@@ -127,14 +135,19 @@ const Blogs = () => {
               )
             }
             {postData && postData.current_page < postData.last_page &&
-              <Text
-                color='orange.400'
-                mx={2}
-                cursor='pointer'
-                onClick={() => changePage(postData.current_page + 1)}
+              <Flex
+
               >
-                Volgende pagina
-              </Text>
+                <Text
+                  color='brand.navigation.orange'
+                  mx={2}
+                  cursor='pointer'
+                  onClick={() => changePage(postData.current_page + 1)}
+                >
+                  Volgende pagina
+                </Text>
+                <ArrowRight color='#F27623' />
+              </Flex>
             }
           </Flex>
         </Flex>

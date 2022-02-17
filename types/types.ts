@@ -1,6 +1,6 @@
 export interface PostDataType {
   current_page: number;
-  data: Post[];
+  data: PostType[];
   first_page_url: string;
   from: number;
   last_page: number;
@@ -14,7 +14,7 @@ export interface PostDataType {
   total: number;
 }
 
-export type Post = {
+export type PostType = {
   id: number
   created_at: Date
   updated_at: Date

@@ -23,7 +23,6 @@ const Header = (props: any) => {
     <Flex
       minH='500px'
       w='100%'
-      bgColor='black'
       bg="linear-gradient(rgba(0, 0, 0, 0.4 ), rgba(0, 0, 0, 0.4)), url('/static/images/background.png')"
       bgSize='cover'
       bgPosition='center'
@@ -41,7 +40,7 @@ const Header = (props: any) => {
       </Flex>
       {title &&
         <Heading
-          color='white'
+          color='brand.white'
           fontSize={64}
         >
           {title}
@@ -52,13 +51,13 @@ const Header = (props: any) => {
         top={16}
         right={16}
         fontSize={24}
-        color='white'
+        color='brand.white'
       >
         <Text
           cursor='pointer'
           onClick={() => router.push('/')}
           textDecoration={currentPath === '' ? 'underline' : 'unset'}
-          textDecorationColor='orange.500'
+          textDecorationColor='brand.underline'
           textDecorationThickness='4px'
           textUnderlineOffset='8px'
         >
@@ -68,7 +67,7 @@ const Header = (props: any) => {
           cursor='pointer'
           onClick={() => router.push('/blog')}
           textDecoration={currentPath === 'blog' ? 'underline' : 'unset'}
-          textDecorationColor='orange.500'
+          textDecorationColor='brand.underline'
           textDecorationThickness='4px'
           textUnderlineOffset='8px'
           ml={8}

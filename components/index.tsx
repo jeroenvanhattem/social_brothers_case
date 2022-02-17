@@ -8,12 +8,16 @@ import {
   Select,
   Textarea,
   useEditable,
-  Button
+  Button,
+  MenuItemOption
 } from "@chakra-ui/react"
 import { useEffect, useRef, useState } from "react"
+import { Camera } from "react-feather"
 import { uploadPost, useGetCategories, useGetPosts } from "../hooks/postsHooks"
-import { NewPost, Post, PostDataType } from "../types/types"
+import { NewPost, PostType, PostDataType } from "../types/types"
+import Post from './post'
 import Header from "./header"
+import Footer from "./footer"
 
 const Index = () => {
   const [postData, setPostData] = useState<PostDataType | null>(null)
@@ -117,15 +121,16 @@ const Index = () => {
         maxW='100vw'
         flexDir='column'
         justify='flex-start'
-        bgColor='#F4F4F4'
+        bgColor='brand.background'
+        overflowX='hidden'
       >
         <Header />
 
         <Flex
           flexDir='row'
           w='90%'
-          minH='1200px'
-          maxH='1200px'
+          minH='1050px'
+          maxH='1050px'
           mx='auto'
           mt={16}
         >
@@ -135,9 +140,10 @@ const Index = () => {
             bgColor="white"
             p={8}
             m={8}
+            color='brand.text'
           >
             <Heading
-              color='black'
+              color='brand.title'
             >
               Plaats een blog bericht
             </Heading>
@@ -148,45 +154,61 @@ const Index = () => {
 
               <Flex
                 flexDir='column'
+                my={4}
               >
                 <Text>Berichtnaam</Text>
-                <Input ref={titleInputRef} />
+                <Input ref={titleInputRef} bgColor='brand.inputBackground' placeholder='Geen titel' fontStyle='italic' />
               </Flex>
 
               <Flex
                 flexDir='column'
+                my={4}
               >
                 <Text>Categorie</Text>
-                <Select ref={categoryInputRef} onChange={updateSelectedCategory} placeholder='Geen categorie'>
+                <Select ref={categoryInputRef} bgColor='brand.inputBackground' onChange={updateSelectedCategory} placeholder='Geen categorie' fontStyle='italic' >
                   {categories && categories.map((category: any) => {
-                    return <option value={category.id} key={category.id}>{category.name}</option>
+                    return <option value={category.id} style={{ fontFamily: 'Proxima Nova Rg' }} key={category.id}>{category.name}</option>
                   })}
                 </Select>
               </Flex>
 
               <Flex
                 flexDir='column'
+                my={4}
               >
                 <Text>Header afbeelding</Text>
-                <Input ref={imageInputRef} onChange={previewImage} type='file' />
-                {imageExample && <Image maxH={48} src={imageExample} alt='example' />}
+                <Flex
+                  align='center'
+                  p={2}
+                >
+                  <Camera color='#868686' size={18} />
+                  <Button w={20} h={6} borderRadius={96} ml={4} px={12} fontSize={12} fontWeight={300} color='brand.white' bgColor='brand.buttonDark' onClick={() => imageInputRef?.current?.click()}>Kies bestand</Button>
+                  <Input ref={imageInputRef} d={'none'} accept="image/png, image/jpeg, image/jpg, image/gif" onChange={previewImage} type='file' />
+                  {imageExample && <Image ml={8} maxH={24} src={imageExample} alt='example' />}
+                </Flex>
 
               </Flex>
 
               <Flex
                 flexDir='column'
+                my={4}
               >
                 <Text>Bericht</Text>
-                <Textarea ref={contentInputRef} />
+                <Textarea ref={contentInputRef} bgColor='brand.inputBackground' minH='470px' />
               </Flex>
             </Flex>
 
             <Button
               mx='auto'
-              bgColor='orange.500'
-              color='white'
+              bgColor='brand.button'
+              color='brand.white'
               onClick={createPost}
               w={48}
+              fontSize={14}
+              h='31px'
+              p={4}
+              my={4}
+              borderRadius='18px'
             >
               Bericht aanmaken
             </Button>
@@ -211,38 +233,27 @@ const Index = () => {
               justify='center'
               spacing={8}
             >
-              {postData && postData.data && postData.data.map((post: Post) => {
-                return (
-                  <Flex
-                    w='40%'
-                    h={256}
-                    shadow='xl'
-                    key={post.id}
-                    flexDir='column'
-                  >
-                    <Flex
-                      h='96px'
-                      w='100%'
-                      bg={`linear-gradient(rgba(0, 0, 0, 0.4 ), rgba(0, 0, 0, 0.4)), url(${post.img_url})`}
-                    >
-
-                    </Flex>
-                    <Heading fontSize={28}>{post.title}</Heading>
-                    <Text>{post.content}</Text>
-                  </Flex>
-                )
+              {postData && postData.data && postData.data.map((post: PostType) => {
+                return <Post post={post} key={post.id} />
               })}
             </Wrap>
             <Button
-              bgColor='orange.500'
-              color='white'
+              mx='auto'
+              bgColor='brand.button'
+              color='brand.white'
               onClick={loadMore}
+              w={48}
+              fontSize={14}
+              h='31px'
+              p={4}
+              my={4}
+              borderRadius='18px'
             >
               Meer laden
             </Button>
           </Flex>
         </Flex>
-
+        <Footer />
       </Flex>
     </>
   )
