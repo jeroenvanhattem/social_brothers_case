@@ -1,6 +1,6 @@
 ## Getting Started
 
-First, you'll have to to change the .env.example to just .env and fill in the TOKEN variable. You can find this in the Postman API information.
+First, you'll have to to change the .env.local.example to just .env.local and fill in the TOKEN variable. You can find this in the Postman API information.
 Then run the development server:
 
 ```bash
