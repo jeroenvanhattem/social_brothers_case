@@ -23,6 +23,7 @@ const Header = (props: any) => {
   return (
     <Flex
       minH='250px'
+      maxW='100vw'
       w='100%'
       bgColor='brand.black'
       bg="linear-gradient(rgba(0, 0, 0, 0.4 ), rgba(0, 0, 0, 0.4)), url('/static/images/background.png')"

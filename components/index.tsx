@@ -126,8 +126,8 @@ const Index = () => {
     <>
       <Flex
         minH="100vh"
-        w="100vw"
-        maxW='100vw'
+        w="100%"
+        maxW='100%'
         flexDir='column'
         bgColor='brand.background'
         overflowX='hidden'
@@ -141,6 +141,7 @@ const Index = () => {
           <Flex
             flexDir={{ base: 'column', lg: 'row' }}
             w={{ base: '100%', lg: '90%' }}
+            maxW='2000px'
             minH='1050px'
             mx='auto'
           >
